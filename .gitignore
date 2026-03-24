@@ -1,0 +1,7 @@
+__pycache__/
+yolo_env/
+*.zip
+.vscode/        
+MRP_12/        
+Documents/
+MRP-2025-11-04/
