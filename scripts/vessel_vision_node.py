@@ -13,7 +13,6 @@ class VesselVisionNode:
         
         self.bridge = CvBridge()
         
-        # PRO-TIP: This line finds the model folder relative to where the script is
         script_dir = os.path.dirname(os.path.realpath(__file__))
         model_p = os.path.join(script_dir, '..', 'models', 'best.pt')
         
@@ -28,9 +27,9 @@ class VesselVisionNode:
         try:
             frame = self.bridge.imgmsg_to_cv2(msg, "bgr8")
             result = self.analyzer.process_frame(frame)
-            
+            ratio = result['ratio']
             self.ratio_pub.publish(result['ratio'])
-            
+            rospy.loginfo(f"Vessel Ratio: {ratio:.3f}")
             # Show live feed with YOLO overlay
             cv2.imshow("Vessel Detection", result['frame'])
             cv2.waitKey(1)
