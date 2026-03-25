@@ -4,7 +4,7 @@ from vessel_detector import VesselAnalyzer
 analyzer = VesselAnalyzer(model_path='models/best.pt')
 
 #use this for simulation
-video_path = "MRP-2025-11-04/TEST 2 VIDEO/20251017 054351.mp4"
+video_path = "MRP-2025-11-04/videos/TEST 2 VIDEO/20251017 054351.mp4"
 cap = cv2.VideoCapture(video_path)
 ##
 

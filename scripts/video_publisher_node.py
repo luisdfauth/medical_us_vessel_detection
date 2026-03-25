@@ -6,20 +6,17 @@ from cv_bridge import CvBridge
 
 def publish_video():
     rospy.init_node('video_publisher_node')
-    # Use the same topic your vision_node is listening to
     pub = rospy.Publisher('/camera/image_raw', Image, queue_size=10)
     bridge = CvBridge()
     
-    # Replace with the path to your .mp4 or .avi file
-    video_path = 'vessel_ultrasound.mp4' 
+    video_path = 'MRP-2025-11-04/videos/TEST 2 VIDEO/20251017 054351.mp4' 
     cap = cv2.VideoCapture(video_path)
 
     if not cap.isOpened():
         rospy.logerr("Could not open video file!")
         return
 
-    # Match the video's original speed (e.g., 30 FPS)
-    rate = rospy.Rate(30) 
+    rate = rospy.Rate(19.05) 
 
     while not rospy.is_shutdown() and cap.isOpened():
         ret, frame = cap.read()
