@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import rospy
 import cv2
+import rospkg
+import os
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 
@@ -9,6 +11,8 @@ def publish_video():
     pub = rospy.Publisher('/camera/image_raw', Image, queue_size=10)
     bridge = CvBridge()
     
+    rospack = rospkg.RosPack()
+    pkg_path = rospack.get_path('medical_us_vessel_detection')
     video_path = os.path.join(pkg_path, 'MRP-2025-11-04', 'videos', 'TEST 2 VIDEO', '20251017 054351.mp4')
     cap = cv2.VideoCapture(video_path)
 
