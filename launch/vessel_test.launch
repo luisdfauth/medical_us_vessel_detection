@@ -1,0 +1,11 @@
+<launch>
+    <node pkg="medical_us_vessel_detection" type="video_publisher_node.py" name="video_publisher" output="screen">
+        <param name="video_path" value="$(find medical_us_vessel_detection)/MRP-2025-11-04/videos/TEST 2 VIDEO/20251017 054351.mp4" />
+    </node>
+
+    <node pkg="medical_us_vessel_detection" type="vessel_vision_node.py" name="vision_processor" output="screen" />
+
+    <!--<node pkg="medical_us_vessel_detection" type="control_node.py" name="robot_controller" output="screen" /> -->
+
+    <node pkg="rqt_plot" type="rqt_plot" name="ratio_graph" args="/vessel/ratio/data" />
+</launch>
