@@ -6,6 +6,4 @@
     <node pkg="medical_us_vessel_detection" type="vessel_vision_node.py" name="vision_processor" output="screen" />
 
     <!--<node pkg="medical_us_vessel_detection" type="control_node.py" name="robot_controller" output="screen" /> -->
-
-    <node pkg="rqt_plot" type="rqt_plot" name="ratio_graph" args="/vessel/ratio/data" />
 </launch>
