@@ -9,7 +9,7 @@ def publish_video():
     pub = rospy.Publisher('/camera/image_raw', Image, queue_size=10)
     bridge = CvBridge()
     
-    video_path = 'MRP-2025-11-04/videos/TEST 2 VIDEO/20251017 054351.mp4' 
+    video_path = os.path.join(pkg_path, 'MRP-2025-11-04', 'videos', 'TEST 2 VIDEO', '20251017 054351.mp4')
     cap = cv2.VideoCapture(video_path)
 
     if not cap.isOpened():
