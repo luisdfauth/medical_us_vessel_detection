@@ -18,7 +18,7 @@ class VesselVisionNode:
         
         self.analyzer = VesselAnalyzer(model_path=model_p)
         
-        self.ratio_pub = rospy.Publisher('/vessel/ratio', Float32, queue_size=10)
+        self.ratio_pub = rospy.Publisher('/vessel/score', Float32, queue_size=10)
         self.image_sub = rospy.Subscriber('/camera/image_raw', Image, self.image_callback)
         
         rospy.loginfo("Vision Node Online. Monitoring /camera/image_raw...")
@@ -27,9 +27,9 @@ class VesselVisionNode:
         try:
             frame = self.bridge.imgmsg_to_cv2(msg, "bgr8")
             result = self.analyzer.process_frame(frame)
-            ratio = result['ratio']
-            self.ratio_pub.publish(result['ratio'])
-            rospy.loginfo(f"Vessel Ratio: {ratio:.3f}")
+            score = result['score']
+            self.ratio_pub.publish(result['score'])
+            rospy.loginfo(f"Vessel Score: {score:.3f}")
             # Show live feed with YOLO overlay
             cv2.imshow("Vessel Detection", result['frame'])
             cv2.waitKey(1)
