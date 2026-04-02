@@ -31,7 +31,7 @@ class VesselControlNode:
         
         # 5. Subscribers
         # Subscribes to the live vessel ratio from the vision node
-        self.ratio_sub = rospy.Subscriber('/vessel/ratio', Float32, self.ratio_callback)
+        self.ratio_sub = rospy.Subscriber('/vessel/score', Float32, self.ratio_callback)
 
         
         rospy.loginfo("Control Node Online. Waiting for target ratio and live ratio data...")
