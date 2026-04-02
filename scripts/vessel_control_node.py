@@ -69,7 +69,7 @@ class VesselControlNode:
         
         # 3. Integral term I[k] = I[k-1] + e[k] * dt
         self.integral += error * dt
-        # Integral anti-windup (Clamping)
+        # Integral anti-windup
         self.integral = max(min(self.integral, self.i_limit), -self.i_limit)
         i_out = self.ki * self.integral
         
@@ -77,7 +77,7 @@ class VesselControlNode:
         derivative = (error - self.prev_error) / dt
         d_out = self.kd * derivative
         
-        # 5. Calculate final control effort u[k] (Velocity command)
+        # 5. Calculate final control effort u[k]
         control_effort = p_out + i_out + d_out
         
         
