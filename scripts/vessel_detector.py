@@ -31,21 +31,24 @@ class VesselAnalyzer:
 
         width = min(w, h)
         length = max(w, h)
+        frame_h, frame_w = frame.shape[:2]
         
         if width == 0: 
             aspect_ratio = 0
         else:
             aspect_ratio = length / width
 
+        #thresholds for boxsize
         TRANSVERSE_MAX = 1.2
         LONGITUDINAL_MIN = 5.3
         LONGITUDINAL_MAX = 6.5
+        is_full_width = length >= (frame_w * 0.95)   # 95% threshold for "full"
 
         if 0.8 < aspect_ratio < TRANSVERSE_MAX:
             state = "TRANSVERSE (Target Reached)"
             color = (0, 255, 0) # Green
             score = 1
-        elif LONGITUDINAL_MIN< aspect_ratio < LONGITUDINAL_MAX: 
+        elif LONGITUDINAL_MIN< aspect_ratio < LONGITUDINAL_MAX and is_full_width : 
             state = "LONGITUDINAL (Target Reached)"
             color = (0, 0, 255) # Red
             score = 10
