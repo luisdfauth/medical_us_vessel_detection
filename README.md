@@ -1,7 +1,7 @@
-models/best.pt is the vision recognition model
-val/.. has the validation analysis of the final model
-blood vessel recognition.v3i.yolov8/.. contains the test, train and validation sets
-setup.bat starts the yolo environment and installs possible necessary packages
-test.py and sanity_check.py are codes for development of the model
-vessel_detector.py contains the VesselAnalizer class and the process_frame function within
-vessel_vision_node.py is the ROS 1 ready code for the vessel recognition function
+# Autonomous Robotic Ultrasound Scanning: A Closed-Loop Visuomotor Framework with RCM Constraints
+
+[cite_start]Manual ultrasound scanning for diagnosing Peripheral Vascular Disease is highly dependent on the skill of the operator, which can limit patient access to consistent and timely care. [cite_start]To solve this bottleneck, this project introduces a transparent and modular robotic system that enables a KUKA robotic arm to autonomously adjust an ultrasound probe to capture the ideal longitudinal view of a blood vessel. [cite_start]Unlike complex, "black-box" machine learning methods that control the robot directly, our approach safely splits the task into two clear stages: a reliable vision system that figures out what the probe is seeing, and a precise mathematical controller that dictates how the robot should move.
+
+[cite_start]At the core of the system, a deep-learning YOLOv8 model analyzes real-time ultrasound images to extract the vessel's shape and aspect ratio, turning visual data into a continuous feedback score. [cite_start]A discrete-time PID controller then calculates how much the probe needs to rotate to perfect the view. [cite_start]Because the vision model processes images at roughly 7.8 frames per second while the robot expects commands at a much faster 50 Hz, we implemented a time-interpolation smoothing filter. [cite_start]This bridge ensures the robot transitions smoothly without jerky movements or mechanical vibration.
+
+[cite_start]Crucially, the framework enforces a strict geometric Remote Center of Motion (RCM) constraint. [cite_start]This medical safety feature ensures that while the probe rotates to optimize the image, its physical tip remains locked as a stationary pivot point on the surface. [cite_start]Real-world testing on a vascular phantom setup proved that the system fully aligns itself within approximately 61 seconds while restricting the tip's physical drift to just 4.98 mm. [cite_start]This minor deviation is safely and easily absorbed by the natural elasticity of human soft tissue, offering a highly dependable foundation for future operator-independent medical scanning.
